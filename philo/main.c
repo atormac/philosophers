@@ -6,11 +6,20 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/06/28 16:48:09 by atorma           ###   ########.fr       */
+/*   Updated: 2024/06/28 17:04:33 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	check_args(t_philo *p)
+{
+	if (!p->number || !p->time_die || !p->time_eat || !p->time_sleep)
+		return (0);
+	if (p->number > 200)
+		return (0);
+	return (1);
+}
 
 int	parse_args(t_philo *p, int argc, char **argv)
 {
@@ -30,7 +39,8 @@ int	parse_args(t_philo *p, int argc, char **argv)
 	}
 	if (error)
 		return (0);
-
+	if (!check_args(p))
+		return (0);
 	printf("p->number: %zu\n", p->number);
 	printf("p->time_die: %zu\n", p->time_die);
 	printf("p->time_eat: %zu\n", p->time_eat);
