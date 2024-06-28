@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:34:18 by atorma            #+#    #+#             */
-/*   Updated: 2024/06/28 14:32:21 by atorma           ###   ########.fr       */
+/*   Updated: 2024/06/28 15:12:43 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	is_valid(const char *s)
 size_t	ft_atoi(const char *s, int *error)
 {
 	size_t		res;
+	size_t		tmp;
 
 	res = 0;
 	if (*error == 1)
@@ -39,7 +40,13 @@ size_t	ft_atoi(const char *s, int *error)
 	}
 	while (*s && *s >= '0' && *s <= '9')
 	{
+		tmp = res;
 		res = res * 10 + (*s - '0');
+		if (res < tmp)
+		{
+			*error = 1;
+			return (0);
+		}
 		s++;
 	}
 	return (res);
