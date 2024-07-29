@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:46:36 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:55:59 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	check_args(t_philo *p)
 {
-	if (!p->count || !p->time_die || !p->time_eat || !p->time_sleep)
-		return (0);
-	if (p->count > 200)
+	if (p->count <= 0 || !p->time_die || !p->time_eat || !p->time_sleep)
 		return (0);
 	return (1);
 }
