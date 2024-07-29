@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:22:08 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:27:50 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef struct t_philo
 	int				is_opt;
 	size_t			fork_count;
 	size_t			state;
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
 	pthread_t		thid;
 }	t_philo;
 
