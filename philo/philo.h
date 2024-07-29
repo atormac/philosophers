@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 16:59:29 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:22:08 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+
+enum
+{
+	STATE_THINK,
+	STATE_SLEEP,
+	STATE_EAT,
+	STATE_DEAD
+};
 
 typedef struct t_philo
 {
