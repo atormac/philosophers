@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 16:14:32 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:53:34 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ int	parse_args(t_philo *p, int argc, char **argv)
 	printf("p->time_eat: %zu\n", p->time_eat);
 	printf("p->time_sleep: %zu\n", p->time_sleep);
 	printf("p->eat_count: %zu\n", p->count_eat);
+	p->fork_count = p->number - 1;
+	if (p->fork_count == 0)
+		p->fork_count = 1;
 	return (1);
 }
 
 int main(int argc, char **argv)
 {
 	t_philo	p;
+	pthread_mutex_t	mutex;
 
 	if (argc != 5 && argc != 6)
 	{
@@ -63,6 +67,8 @@ int main(int argc, char **argv)
 		printf("Error: Invalid arguments\n");
 		return (0);
 	}
+	p.mutex = &mutex;
 	philo_threads_create(&p);
+	printf("Finished...\n");
 	return (0);
 }
