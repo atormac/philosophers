@@ -6,14 +6,14 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:00:21 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:46:26 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <string.h>
 
-void	*thread(void *arg)
+void	*routine(void *arg)
 {
 	t_philo *p;
 
@@ -22,29 +22,39 @@ void	*thread(void *arg)
 	return (arg);
 }
 
-int	philo_threads_create(t_philo *p)
+int	philo_threads(t_philo *philos, t_philo *p)
 {
-	t_philo* philos;
-	void	*ret;
 	size_t	i;
+	void	*ret;
 
-	philos = malloc((p->count * sizeof(t_philo)));
-	if (!philos)
-		return (0);
 	i = 0;
 	while (i < p->count)
 	{
 		memcpy(&philos[i], p, sizeof(t_philo));
 		philos[i].number = i + 1;
-		pthread_create(&philos[i].thid, NULL, thread, &philos[i]);
+		if (pthread_create(&philos[i].thid, NULL, routine, &philos[i]) != 0)
+			return (0);
 		i++;
 	}
 	i = 0;
 	while (i < p->count)
 	{
-		pthread_join(philos[i].thid, &ret);
+		if (pthread_join(philos[i].thid, &ret) == 0)
+			return (0);
 		i++;
 	}
+	return (1);
+	
+}
+
+int	philo_run(t_philo *p)
+{
+	t_philo* philos;
+
+	philos = malloc((p->count * sizeof(t_philo)));
+	if (!philos)
+		return (0);
+	philo_threads(philos, p);
 	free(philos);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 16:58:17 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:46:36 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	parse_args(t_philo *p, int argc, char **argv)
 int main(int argc, char **argv)
 {
 	t_philo	p;
-	pthread_mutex_t	mutex;
 
 	if (argc != 5 && argc != 6)
 	{
@@ -67,8 +66,7 @@ int main(int argc, char **argv)
 		printf("Error: Invalid arguments\n");
 		return (0);
 	}
-	p.mutex = &mutex;
-	philo_threads_create(&p);
+	philo_run(&p);
 	printf("Finished...\n");
 	return (0);
 }

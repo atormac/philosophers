@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:27:50 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:46:57 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ typedef struct t_philo
 
 
 size_t	ft_atoi(const char *s, int *error);
-int		philo_threads_create(t_philo *p);
+int		philo_run(t_philo *p);
 
 #endif
