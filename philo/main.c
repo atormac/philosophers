@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/06/28 17:04:33 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:14:32 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int main(int argc, char **argv)
 		printf("Error: Invalid arguments\n");
 		return (0);
 	}
-
+	philo_threads_create(&p);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/06/28 16:44:46 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:17:26 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <unistd.h>
 
 typedef struct t_philo
 {
@@ -28,5 +29,6 @@ typedef struct t_philo
 }	t_philo;
 
 size_t	ft_atoi(const char *s, int *error);
+int		philo_threads_create(t_philo *p);
 
 #endif

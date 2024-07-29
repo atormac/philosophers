@@ -6,15 +6,15 @@
 #    By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 13:55:29 by atorma            #+#    #+#              #
-#    Updated: 2024/06/28 14:17:39 by atorma           ###   ########.fr        #
+#    Updated: 2024/07/29 16:16:49 by atorma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
 CFLAGS := -Wall -Wextra -Werror 
-#LDFLAGS := -lreadline
-SOURCES = main.c ft_atoi.c
+LDFLAGS := -lpthread
+SOURCES = main.c ft_atoi.c philo.c
 OBJECTS = $(SOURCES:.c=.o)
 
 target debug: CC = clang
