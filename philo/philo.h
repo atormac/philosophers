@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 16:34:40 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 16:59:29 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct t_philo
 {
+	size_t			count;
 	size_t			number;
 	size_t			time_die;
 	size_t			time_eat;
