@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:46:26 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:47:35 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ int	philo_threads(t_philo *philos, t_philo *p)
 int	philo_run(t_philo *p)
 {
 	t_philo* philos;
+	int		ret;
 
 	philos = malloc((p->count * sizeof(t_philo)));
 	if (!philos)
 		return (0);
-	philo_threads(philos, p);
+	ret = philo_threads(philos, p);
 	free(philos);
-	return (1);
+	return (ret);
 }
