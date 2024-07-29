@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:47:35 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/29 18:04:07 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	philo_threads(t_philo *philos, t_philo *p)
 	i = 0;
 	while (i < p->count)
 	{
-		if (pthread_join(philos[i].thid, &ret) == 0)
+		if (pthread_join(philos[i].thid, &ret) != 0)
 			return (0);
 		i++;
 	}
