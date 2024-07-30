@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:55:59 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/30 15:55:56 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ int	parse_args(t_philo *p, int argc, char **argv)
 	return (1);
 }
 
+void	print_message(int num, int state);
+
 int main(int argc, char **argv)
 {
 	t_philo	p;
 
+	print_message(1, STATE_EAT);
 	if (argc != 5 && argc != 6)
 	{
 		printf("Usage: ./philo <number_philos> <die_ms> <eat_ms> <sleep_ms>, <opt_eat_count>\n");
