@@ -6,18 +6,27 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 18:04:07 by atorma           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:50:53 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <string.h>
 
+void	sleep_ms(int milliseconds)
+{
+	unsigned int	ms;
+
+	ms = milliseconds * 1000;
+	usleep(ms);
+}
+
 void	*routine(void *arg)
 {
 	t_philo *p;
 
 	p = (t_philo *)arg;
+	sleep_ms(1000);
 	printf("philo->number: %zu\n", p->number);
 	return (arg);
 }
@@ -44,7 +53,6 @@ int	philo_threads(t_philo *philos, t_philo *p)
 		i++;
 	}
 	return (1);
-	
 }
 
 int	philo_run(t_philo *p)
