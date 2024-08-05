@@ -38,8 +38,7 @@ typedef struct t_philo
 	int				is_opt;
 	size_t			fork_count;
 	size_t			state;
-	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	fork;
 	pthread_t		thid;
 }	t_philo;
 
