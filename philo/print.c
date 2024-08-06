@@ -45,8 +45,8 @@ void	print_message(t_philo *philo, int state)
 		msg = "is sleeping";
 	else
 		msg = "has taken a fork";
-	
 	pthread_mutex_lock(philo->mutex);
-	printf("%lld %zu %s\n", timestamp_ms(), philo->number, msg);
+	if (!philo->main->stopped)
+		printf("%lld %zu %s\n", timestamp_ms(), philo->number, msg);
 	pthread_mutex_unlock(philo->mutex);
 }

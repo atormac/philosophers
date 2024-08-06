@@ -28,6 +28,8 @@ enum
 	STATE_EAT
 };
 
+struct	t_main;
+
 typedef struct t_philo
 {
 	int				*stop;
@@ -42,11 +44,12 @@ typedef struct t_philo
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
 	pthread_t		thid;
+	struct t_main			*main;
 }	t_philo;
 
 typedef struct	t_main
 {
-	int				stop;
+	int				stopped;
 	size_t			count;
 	size_t			meals_limit;
 	size_t			time_die;

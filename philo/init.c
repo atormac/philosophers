@@ -19,9 +19,10 @@ int	init(t_philo *philos, t_philo *p, t_main *m)
 		i++;
 	}
 	i = 0;
+	m->stopped = 0;
 	while (i < m->count)
 	{
-		philos[i].stop = 0;
+		philos[i].main = m;
 		philos[i].meals_eaten = 0;
 		philos[i].last_ate = 0;
 		philos[i].mutex = &m->mutex;
