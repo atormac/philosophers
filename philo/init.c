@@ -7,8 +7,6 @@ int	init(t_philo *philos, t_philo *p, t_main *m)
 	size_t	i;
 
 	i = 0;
-	if (pthread_mutex_init(&m->mutex, NULL) != 0)
-		return (0);
 	while (i < m->count)
 	{
 		memcpy(&philos[i], p, sizeof(t_philo));
@@ -31,10 +29,17 @@ int	init(t_philo *philos, t_philo *p, t_main *m)
 		philos[i].time_sleep = m->time_sleep;
 		philos[i].fork_left = &philos[i].fork;
 		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
+		if (i % 2)
+		{
+			philos[i].fork_left = &philos[(i + 1) % m->count].fork;
+			philos[i].fork_right = &philos[i].fork;
+		}
 		printf("philo: %zu, fork_left: %p, fork_right: %p\n",
 				philos[i].number, philos[i].fork_left, philos[i].fork_right);
 		i++;
 	}
+	if (pthread_mutex_init(&m->mutex, NULL) != 0)
+		return (0);
 	return (1);
 }
 
@@ -46,6 +51,11 @@ void	uninit(t_main *m, t_philo *philos)
 	while (i < m->count)
 	{
 		pthread_join(philos[i].thid, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < m->count)
+	{
 		pthread_mutex_destroy(&philos[i].fork);
 		i++;
 	}

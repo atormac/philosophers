@@ -23,6 +23,9 @@ target debug: CFLAGS += -fsanitize=address,undefined -g
 target thread: CC = cc
 target thread: CFLAGS += -fsanitize=thread -g
 
+target symbols: CC = cc
+target symbols: CFLAGS += -gdwarf-4
+
 all: $(NAME)
 
 export CC
@@ -44,5 +47,6 @@ re: fclean all
 
 debug: re
 thread: re
+symbols: re
 
 .PHONY: debug all clean fclean re

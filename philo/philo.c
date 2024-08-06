@@ -26,15 +26,13 @@ int	has_stopped(t_philo *philo)
 	pthread_mutex_unlock(philo->mutex);
 	return (ret);
 }
-int	take_forks(t_philo *philo)
+
+void	take_forks(t_philo *philo)
 {
-	if (has_stopped(philo))
-		return (0);
 	pthread_mutex_lock(philo->fork_left);
 	print_message(philo, STATE_TOOK_FORK);
 	pthread_mutex_lock(philo->fork_right);
 	print_message(philo, STATE_TOOK_FORK);
-	return (1);
 }
 
 void	eat_meal(t_philo *philo)
@@ -45,8 +43,8 @@ void	eat_meal(t_philo *philo)
 	pthread_mutex_unlock(philo->mutex);
 	print_message(philo, STATE_EAT);
 	sleep_ms(philo->time_eat);
-	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
+	pthread_mutex_unlock(philo->fork_left);
 }
 
 void	*routine(void *ptr)
@@ -56,10 +54,9 @@ void	*routine(void *ptr)
 	philo = (t_philo *)ptr;
 	if ((philo->number % 2)  == 0)
 		sleep_ms(10);
-	while (1)
+	while (!has_stopped(philo))
 	{
-		if (!take_forks(philo))
-			break ;
+		take_forks(philo);
 		eat_meal(philo);
 		if (has_stopped(philo))
 			break ;
@@ -67,7 +64,7 @@ void	*routine(void *ptr)
 		sleep_ms(philo->time_sleep);
 		print_message(philo, STATE_THINK);
 	}
-	printf("ROUTINE END REACHED\n");
+	//printf("ROUTINE END REACHED\n");
 	return (NULL);
 }
 
@@ -144,6 +141,7 @@ int	philo_run(t_main *m)
 	ret = philo_threads(m, philos);
 	while (1)
 	{
+		sleep_ms(1);
 		if (!philo_observe(m, philos))
 			break;
 	}
