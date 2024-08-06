@@ -135,9 +135,7 @@ int	philo_monitor(t_main *m, t_philo *philos)
 	}
 	ret = m->stopped;
 	pthread_mutex_unlock(&m->mutex);
-	if (!ret)
-		return (0);
-	return (1);
+	return (!ret);
 }
 
 int	philo_run(t_main *m)
