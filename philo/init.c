@@ -24,9 +24,6 @@ int	init(t_philo *philos, t_philo *p, t_main *m)
 		philos[i].meals_eaten = 0;
 		philos[i].last_ate = 0;
 		philos[i].mutex = &m->mutex;
-		philos[i].time_die = m->time_die;
-		philos[i].time_eat = m->time_eat;
-		philos[i].time_sleep = m->time_sleep;
 		philos[i].fork_left = &philos[i].fork;
 		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
 		if (i % 2)

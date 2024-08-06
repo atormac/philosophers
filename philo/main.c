@@ -36,7 +36,7 @@ int	parse_args(t_main *m, int argc, char **argv)
 	if (!check_args(m))
 		return (0);
 	printf("main->count: %zu\n", m->count);
-	printf("main->time_die: %zu\n", m->time_die);
+	printf("main->time_die: %lld\n", m->time_die);
 	printf("main->time_eat: %zu\n", m->time_eat);
 	printf("main->time_sleep: %zu\n", m->time_sleep);
 	printf("main->meals_limit: %zu\n", m->meals_limit);

@@ -34,9 +34,6 @@ typedef struct t_philo
 {
 	int				*stop;
 	size_t			number;
-	size_t			time_sleep;
-	size_t			time_eat;
-	long long		time_die;
 	size_t			meals_eaten;
 	long long		last_ate;
 	pthread_mutex_t *mutex;
@@ -52,7 +49,7 @@ typedef struct	t_main
 	int				stopped;
 	size_t			count;
 	size_t			meals_limit;
-	size_t			time_die;
+	long long		time_die;
 	size_t			time_eat;
 	size_t			time_sleep;
 	pthread_mutex_t	mutex;

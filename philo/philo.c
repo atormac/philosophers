@@ -42,7 +42,7 @@ void	eat_meal(t_philo *philo)
 	philo->last_ate = timestamp_ms();
 	pthread_mutex_unlock(philo->mutex);
 	print_message(philo, STATE_EAT);
-	sleep_ms(philo->time_eat);
+	sleep_ms(philo->main->time_eat);
 	pthread_mutex_unlock(philo->fork_right);
 	pthread_mutex_unlock(philo->fork_left);
 }
@@ -61,10 +61,9 @@ void	*routine(void *ptr)
 		if (has_stopped(philo))
 			break ;
 		print_message(philo, STATE_SLEEP);
-		sleep_ms(philo->time_sleep);
+		sleep_ms(philo->main->time_sleep);
 		print_message(philo, STATE_THINK);
 	}
-	//printf("ROUTINE END REACHED\n");
 	return (NULL);
 }
 
@@ -92,7 +91,7 @@ int	has_died(t_philo *philo)
 		return (0);
 	ms = timestamp_ms();
 	delta = ms - philo->last_ate;
-	if (delta < philo->time_die)
+	if (delta < philo->main->time_die)
 		return (0);
 	philo->main->stopped = 1;
 	printf("%lld %zu died\n", ms, philo->number);
