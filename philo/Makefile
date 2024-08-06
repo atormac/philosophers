@@ -17,8 +17,11 @@ LDFLAGS := -lpthread
 SOURCES = main.c init.c philo.c print.c ft_atoi.c
 OBJECTS = $(SOURCES:.c=.o)
 
-target debug: CC = clang
+target debug: CC = cc
 target debug: CFLAGS += -fsanitize=address,undefined -g 
+
+target thread: CC = cc
+target thread: CFLAGS += -fsanitize=thread -g
 
 all: $(NAME)
 
@@ -40,5 +43,6 @@ fclean: clean
 re: fclean all
 
 debug: re
+thread: re
 
 .PHONY: debug all clean fclean re

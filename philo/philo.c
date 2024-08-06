@@ -32,6 +32,15 @@ void	*routine(void *ptr)
 	sleep_ms(1000);
 	print_message(philo->number, STATE_TOOK_FORK);
 	pthread_mutex_unlock(philo->mutex);
+	/*
+	while (1)
+	{
+		lock_forks()
+		eat()
+		sleep()
+		think()
+	}
+	*/
 	return (NULL);
 }
 
