@@ -32,7 +32,6 @@ struct	t_main;
 
 typedef struct t_philo
 {
-	int				*stop;
 	size_t			number;
 	size_t			meals_eaten;
 	long long		last_ate;
@@ -57,8 +56,7 @@ typedef struct	t_main
 }	t_main;
 
 
-size_t	ft_atoi(const char *s, int *error);
-int		init(t_philo *philos, t_philo *p, t_main *m);
+int		init(t_philo *philos, t_main *m);
 void	uninit(t_main *m, t_philo *philos);
 int		philo_run(t_main *m);
 

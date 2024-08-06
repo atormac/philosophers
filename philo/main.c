@@ -12,6 +12,8 @@
 
 #include "philo.h"
 
+size_t	ft_atoi(const char *s, int *error);
+
 int	check_args(t_main *p)
 {
 	if (p->count <= 0 || !p->time_die || !p->time_eat || !p->time_sleep)
@@ -31,9 +33,7 @@ int	parse_args(t_main *m, int argc, char **argv)
 	m->meals_limit = 0;
 	if (argc == 6)
 		m->meals_limit = ft_atoi(argv[5], &error);
-	if (error)
-		return (0);
-	if (!check_args(m))
+	if (error || !check_args(m))
 		return (0);
 	printf("main->count: %zu\n", m->count);
 	printf("main->time_die: %lld\n", m->time_die);
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 
 	if (argc != 5 && argc != 6)
 	{
-		printf("Usage: ./philo <number_philos> <die_ms> <eat_ms> <sleep_ms>, <opt_eat_count>\n");
+		printf("Usage: ./philo <num> <die_ms> <eat_ms> <sleep_ms>, <meal_limit>\n");
 		return (EXIT_FAILURE);
 	}
 	if (!parse_args(&m, argc, argv))
@@ -62,5 +62,5 @@ int main(int argc, char **argv)
 		printf("Error\n");
 		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

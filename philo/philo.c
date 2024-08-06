@@ -47,11 +47,24 @@ void	eat_meal(t_philo *philo)
 	pthread_mutex_unlock(philo->fork_left);
 }
 
+void	*single_philo(t_philo *philo)
+{
+	print_message(philo, STATE_TOOK_FORK);
+	sleep_ms(philo->main->time_die);
+	pthread_mutex_lock(philo->mutex);
+	philo->main->stopped = 1;
+	printf("%lld %zu died\n", timestamp_ms(), philo->number);
+	pthread_mutex_unlock(philo->mutex);
+	return (NULL);
+}
+
 void	*routine(void *ptr)
 {
 	t_philo *philo;
 
 	philo = (t_philo *)ptr;
+	if (philo->main->count == 1)
+		return (single_philo(philo));
 	if ((philo->number % 2)  == 0)
 		sleep_ms(10);
 	while (!has_stopped(philo))
@@ -98,10 +111,11 @@ int	has_died(t_philo *philo)
 	return (1);
 }
 
-int	philo_observe(t_main *m, t_philo *philos)
+int	philo_monitor(t_main *m, t_philo *philos)
 {
 	size_t	i;
 	size_t	limit_reached;
+	int		ret;
 
 	i = 0;
 	limit_reached = 0;
@@ -119,8 +133,9 @@ int	philo_observe(t_main *m, t_philo *philos)
 		printf("All philosophers ate %zu times\n", m->meals_limit);
 		m->stopped = 1;
 	}
+	ret = m->stopped;
 	pthread_mutex_unlock(&m->mutex);
-	if (m->stopped)
+	if (!ret)
 		return (0);
 	return (1);
 }
@@ -128,11 +143,10 @@ int	philo_observe(t_main *m, t_philo *philos)
 int	philo_run(t_main *m)
 {
 	t_philo	*philos;
-	t_philo	p;
 	int		ret;
 
 	philos = malloc(m->count * sizeof(t_philo));
-	if (!philos || !init(philos, &p, m))
+	if (!philos || !init(philos, m))
 	{
 		free(philos);
 		return (0);
@@ -140,9 +154,9 @@ int	philo_run(t_main *m)
 	ret = philo_threads(m, philos);
 	while (1)
 	{
-		sleep_ms(1);
-		if (!philo_observe(m, philos))
+		if (!philo_monitor(m, philos))
 			break;
+		sleep_ms(1);
 	}
 	uninit(m, philos);
 	printf("SIMULATION END\n");

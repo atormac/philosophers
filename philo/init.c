@@ -2,24 +2,19 @@
 #include "philo.h"
 #include <string.h>
 
-int	init(t_philo *philos, t_philo *p, t_main *m)
+int	init(t_philo *philos, t_main *m)
 {
 	size_t	i;
 
+	m->stopped = 0;
+	if (pthread_mutex_init(&m->mutex, NULL) != 0)
+		return (0);
 	i = 0;
 	while (i < m->count)
 	{
-		memcpy(&philos[i], p, sizeof(t_philo));
-		philos[i].number = i + 1;
 		if (pthread_mutex_init(&philos[i].fork, NULL) != 0)
 			return (0);
-		printf("fork: %zu, %p\n", i, &philos[i].fork);
-		i++;
-	}
-	i = 0;
-	m->stopped = 0;
-	while (i < m->count)
-	{
+		philos[i].number = i + 1;
 		philos[i].main = m;
 		philos[i].meals_eaten = 0;
 		philos[i].last_ate = 0;
@@ -35,8 +30,6 @@ int	init(t_philo *philos, t_philo *p, t_main *m)
 				philos[i].number, philos[i].fork_left, philos[i].fork_right);
 		i++;
 	}
-	if (pthread_mutex_init(&m->mutex, NULL) != 0)
-		return (0);
 	return (1);
 }
 
