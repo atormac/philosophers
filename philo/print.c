@@ -13,7 +13,6 @@
 #include "philo.h"
 #include <sys/time.h>
 
-
 void	print_message(int philo_num, int state)
 {
 	char	*msg;
@@ -21,16 +20,16 @@ void	print_message(int philo_num, int state)
 	struct	timeval tv;
 
 
+	if (state == STATE_DEAD)
+		msg = "died";
 	if (state == STATE_THINK)
 		msg = "is thinking";
 	else if (state == STATE_EAT)
 		msg = "is_eating";
 	else if (state == STATE_SLEEP)
 		msg = "is sleeping";
-	else if (state == STATE_DEAD)
-		msg = "died";
 	else
-		msg = "unknown";
+		msg = "has taken a fork";
 	gettimeofday(&tv, NULL);
 	time_ms = (tv.tv_sec * 1000 + tv.tv_usec) / 1000;
 	printf("%zu %d %s\n", time_ms, philo_num, msg);

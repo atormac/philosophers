@@ -21,29 +21,38 @@
 
 enum
 {
+	STATE_DEAD,
 	STATE_THINK,
 	STATE_SLEEP,
-	STATE_EAT,
-	STATE_DEAD
+	STATE_TOOK_FORK,
+	STATE_EAT
 };
 
 typedef struct t_philo
 {
-	size_t			count;
 	size_t			number;
-	size_t			time_die;
-	size_t			time_eat;
-	size_t			time_sleep;
-	size_t			count_eat;
 	int				is_opt;
-	size_t			fork_count;
 	size_t			state;
+	pthread_mutex_t *mutex;
 	pthread_mutex_t	fork;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t	*fork_right;
 	pthread_t		thid;
 }	t_philo;
 
+typedef struct	t_main
+{
+	size_t			count;
+	ssize_t			eat_count;
+	size_t			time_die;
+	size_t			time_eat;
+	size_t			time_sleep;
+	pthread_mutex_t	mutex;
+	t_philo			*philo;
+}	t_main;
+
 
 size_t	ft_atoi(const char *s, int *error);
-int		philo_run(t_philo *p);
+int		philo_run(t_main *m);
 
 #endif
