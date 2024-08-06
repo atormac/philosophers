@@ -21,7 +21,13 @@ int	init(t_philo *philos, t_philo *p, t_main *m)
 	i = 0;
 	while (i < m->count)
 	{
+		philos[i].stop = 0;
+		philos[i].meals_eaten = 0;
+		philos[i].last_ate = 0;
 		philos[i].mutex = &m->mutex;
+		philos[i].time_die = m->time_die;
+		philos[i].time_eat = m->time_eat;
+		philos[i].time_sleep = m->time_sleep;
 		philos[i].fork_left = &philos[i].fork;
 		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
 		printf("philo: %zu, fork_left: %p, fork_right: %p\n",
@@ -38,6 +44,7 @@ void	uninit(t_main *m, t_philo *philos)
 	i = 0;
 	while (i < m->count)
 	{
+		pthread_join(philos[i].thid, NULL);
 		pthread_mutex_destroy(&philos[i].fork);
 		i++;
 	}

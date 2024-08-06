@@ -13,14 +13,29 @@
 #include "philo.h"
 #include <string.h>
 
-void	print_message(int philo_num, int state);
+void	sleep_ms(int milliseconds);
+long long	timestamp_ms();
+void	print_message(t_philo *philo, int state);
 
-void	sleep_ms(int milliseconds)
+int	take_forks(t_philo *philo)
 {
-	unsigned int	ms;
+	pthread_mutex_lock(philo->fork_left);
+	print_message(philo, STATE_TOOK_FORK);
+	pthread_mutex_lock(philo->fork_right);
+	print_message(philo, STATE_TOOK_FORK);
+	return (1);
+}
 
-	ms = milliseconds * 1000;
-	usleep(ms);
+void	eat_meal(t_philo *philo)
+{
+	pthread_mutex_lock(philo->mutex);
+	philo->meals_eaten++;
+	philo->last_ate = timestamp_ms();
+	pthread_mutex_unlock(philo->mutex);
+	print_message(philo, STATE_EAT);
+	sleep_ms(philo->time_eat);
+	pthread_mutex_unlock(philo->fork_left);
+	pthread_mutex_unlock(philo->fork_right);
 }
 
 void	*routine(void *ptr)
@@ -28,26 +43,22 @@ void	*routine(void *ptr)
 	t_philo *philo;
 
 	philo = (t_philo *)ptr;
-	pthread_mutex_lock(philo->mutex);
-	sleep_ms(1000);
-	print_message(philo->number, STATE_TOOK_FORK);
-	pthread_mutex_unlock(philo->mutex);
-	/*
+	if ((philo->number % 2)  == 0)
+		sleep_ms(10);
 	while (1)
 	{
-		lock_forks()
-		eat()
-		sleep()
-		think()
+		take_forks(philo);
+		eat_meal(philo);
+		print_message(philo, STATE_SLEEP);
+		sleep_ms(philo->time_sleep);
+		print_message(philo, STATE_THINK);
 	}
-	*/
 	return (NULL);
 }
 
 int	philo_threads(t_main *m, t_philo *philos)
 {
 	size_t	i;
-	void	*ret;
 
 	i = 0;
 	while (i < m->count)
@@ -56,13 +67,44 @@ int	philo_threads(t_main *m, t_philo *philos)
 			return (0);
 		i++;
 	}
+	return (1);
+}
+
+
+int	has_died(t_philo *philo)
+{
+	long long	delta;
+	long long	ms;
+
+	if (philo->last_ate <= 0)
+		return (0);
+	ms = timestamp_ms();
+	delta = ms - philo->last_ate;
+	if (delta < philo->time_die)
+		return (0);
+	printf("%lld %zu died\n", ms, philo->number);
+	return (1);
+}
+
+int	philo_observe(t_main *m, t_philo *philos)
+{
+	size_t	i;
+	size_t	limit_reached;
+
 	i = 0;
+	limit_reached = 0;
+	pthread_mutex_lock(&m->mutex);
 	while (i < m->count)
 	{
-		if (pthread_join(philos[i].thid, &ret) != 0)
+		if (has_died(&philos[i]))
 			return (0);
+		if (m->meals_limit && philos[i].meals_eaten >= m->meals_limit)
+			limit_reached++;
 		i++;
 	}
+	pthread_mutex_unlock(&m->mutex);
+	if (limit_reached == m->count)
+		return (0);
 	return (1);
 }
 
@@ -79,6 +121,12 @@ int	philo_run(t_main *m)
 		return (0);
 	}
 	ret = philo_threads(m, philos);
+	while (1)
+	{
+		if (!philo_observe(m, philos))
+			break;
+	}
+	printf("SIMULATION END\n");
 	uninit(m, philos);
 	return (ret);
 }

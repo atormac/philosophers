@@ -30,9 +30,13 @@ enum
 
 typedef struct t_philo
 {
+	int				*stop;
 	size_t			number;
-	int				is_opt;
-	size_t			state;
+	size_t			time_sleep;
+	size_t			time_eat;
+	long long		time_die;
+	size_t			meals_eaten;
+	long long		last_ate;
 	pthread_mutex_t *mutex;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*fork_left;
@@ -42,8 +46,9 @@ typedef struct t_philo
 
 typedef struct	t_main
 {
+	int				stop;
 	size_t			count;
-	ssize_t			eat_count;
+	size_t			meals_limit;
 	size_t			time_die;
 	size_t			time_eat;
 	size_t			time_sleep;

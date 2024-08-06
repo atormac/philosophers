@@ -28,9 +28,9 @@ int	parse_args(t_main *m, int argc, char **argv)
 	m->time_die = ft_atoi(argv[2], &error);
 	m->time_eat = ft_atoi(argv[3], &error);	
 	m->time_sleep = ft_atoi(argv[4], &error);
-	m->eat_count = -1;
+	m->meals_limit = 0;
 	if (argc == 6)
-		m->eat_count = ft_atoi(argv[5], &error);
+		m->meals_limit = ft_atoi(argv[5], &error);
 	if (error)
 		return (0);
 	if (!check_args(m))
@@ -39,7 +39,7 @@ int	parse_args(t_main *m, int argc, char **argv)
 	printf("main->time_die: %zu\n", m->time_die);
 	printf("main->time_eat: %zu\n", m->time_eat);
 	printf("main->time_sleep: %zu\n", m->time_sleep);
-	printf("main->eat_count: %zu\n", m->eat_count);
+	printf("main->meals_limit: %zu\n", m->meals_limit);
 	return (1);
 }
 
@@ -62,6 +62,5 @@ int main(int argc, char **argv)
 		printf("Error\n");
 		return (EXIT_FAILURE);
 	}
-	printf("Finished...\n");
 	return (0);
 }

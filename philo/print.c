@@ -13,24 +13,40 @@
 #include "philo.h"
 #include <sys/time.h>
 
-void	print_message(int philo_num, int state)
+void	sleep_ms(int milliseconds)
+{
+	unsigned int	ms;
+
+	ms = milliseconds * 1000;
+	usleep(ms);
+}
+
+long long	timestamp_ms()
+{
+	long long	time_ms;
+	struct		timeval tv;
+
+	gettimeofday(&tv, NULL);
+	time_ms = (tv.tv_sec * 1000 + tv.tv_usec) / 1000;
+	return (time_ms);
+}
+
+void	print_message(t_philo *philo, int state)
 {
 	char	*msg;
-	size_t	time_ms;
-	struct	timeval tv;
-
 
 	if (state == STATE_DEAD)
 		msg = "died";
 	if (state == STATE_THINK)
 		msg = "is thinking";
 	else if (state == STATE_EAT)
-		msg = "is_eating";
+		msg = "is eating";
 	else if (state == STATE_SLEEP)
 		msg = "is sleeping";
 	else
 		msg = "has taken a fork";
-	gettimeofday(&tv, NULL);
-	time_ms = (tv.tv_sec * 1000 + tv.tv_usec) / 1000;
-	printf("%zu %d %s\n", time_ms, philo_num, msg);
+	
+	pthread_mutex_lock(philo->mutex);
+	printf("%lld %zu %s\n", timestamp_ms(), philo->number, msg);
+	pthread_mutex_unlock(philo->mutex);
 }
