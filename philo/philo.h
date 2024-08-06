@@ -53,6 +53,8 @@ typedef struct	t_main
 
 
 size_t	ft_atoi(const char *s, int *error);
+int		init(t_philo *philos, t_philo *p, t_main *m);
+void	uninit(t_main *m, t_philo *philos);
 int		philo_run(t_main *m);
 
 #endif

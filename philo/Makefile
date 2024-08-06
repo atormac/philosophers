@@ -14,7 +14,7 @@ NAME = philo
 CC = cc
 CFLAGS := -Wall -Wextra -Werror 
 LDFLAGS := -lpthread
-SOURCES = main.c ft_atoi.c philo.c print.c
+SOURCES = main.c init.c philo.c print.c ft_atoi.c
 OBJECTS = $(SOURCES:.c=.o)
 
 target debug: CC = clang

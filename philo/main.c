@@ -52,14 +52,18 @@ int main(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 	{
 		printf("Usage: ./philo <number_philos> <die_ms> <eat_ms> <sleep_ms>, <opt_eat_count>\n");
-		return (0);
+		return (EXIT_FAILURE);
 	}
 	if (!parse_args(&m, argc, argv))
 	{
 		printf("Error: Invalid arguments\n");
-		return (0);
+		return (EXIT_FAILURE);
 	}
-	philo_run(&m);
+	if (!philo_run(&m))
+	{
+		printf("Error\n");
+		return (EXIT_FAILURE);
+	}
 	printf("Finished...\n");
 	return (0);
 }
