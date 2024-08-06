@@ -37,7 +37,7 @@ void	print_message(t_philo *philo, int state)
 
 	if (state == STATE_DEAD)
 		msg = "died";
-	if (state == STATE_THINK)
+	else if (state == STATE_THINK)
 		msg = "is thinking";
 	else if (state == STATE_EAT)
 		msg = "is eating";

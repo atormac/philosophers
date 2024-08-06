@@ -51,9 +51,9 @@ void	*single_philo(t_philo *philo)
 {
 	print_message(philo, STATE_TOOK_FORK);
 	sleep_ms(philo->main->time_die);
+	print_message(philo, STATE_DEAD);
 	pthread_mutex_lock(philo->mutex);
 	philo->main->stopped = 1;
-	printf("%lld %zu died\n", timestamp_ms(), philo->number);
 	pthread_mutex_unlock(philo->mutex);
 	return (NULL);
 }
