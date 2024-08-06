@@ -43,8 +43,6 @@ int	parse_args(t_main *m, int argc, char **argv)
 	return (1);
 }
 
-void	print_message(int num, int state);
-
 int main(int argc, char **argv)
 {
 	t_main	m;
