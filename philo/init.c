@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:33:29 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 17:49:06 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:59:38 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	init(t_philo *philos, t_main *m)
 		philos[i].mutex = &m->mutex;
 		philos[i].fork_left = &philos[i].fork;
 		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
+		if (philos[i].number % 2 == 0)
+		{
+			philos[i].fork_right = &philos[i].fork;
+			philos[i].fork_left = &philos[(i + 1) % m->count].fork;
+		}
 		i++;
 	}
 	return (1);

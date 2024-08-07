@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:30:31 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 17:49:16 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 18:54:01 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ static void	*single_philo(t_philo *philo)
 	return (NULL);
 }
 
+static void	think(t_philo *philo)
+{
+	long long	think_ms;
+	long long	time_since;
+
+	pthread_mutex_lock(philo->mutex);
+	time_since = timestamp_ms() - philo->last_ate + philo->main->time_eat;
+	pthread_mutex_unlock(philo->mutex);
+	print_message(philo, STATE_THINK);
+	think_ms = 0;
+	if (time_since > 600)
+		think_ms = 100;
+	sleep_ms(think_ms);
+}
+
 void	*thread_routine(void *ptr)
 {
 	t_philo	*philo;
@@ -50,8 +65,8 @@ void	*thread_routine(void *ptr)
 	philo = (t_philo *)ptr;
 	if (philo->main->count == 1)
 		return (single_philo(philo));
-	if (philo->number % 2 == 0)
-		sleep_ms(10);
+	if (philo->number % 2)
+		sleep_ms(philo->main->time_eat / 2);
 	while (!has_stopped(philo))
 	{
 		take_forks(philo);
@@ -60,7 +75,7 @@ void	*thread_routine(void *ptr)
 			break ;
 		print_message(philo, STATE_SLEEP);
 		sleep_ms(philo->main->time_sleep);
-		print_message(philo, STATE_THINK);
+		think(philo);
 	}
 	return (NULL);
 }
