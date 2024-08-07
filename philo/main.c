@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:35:27 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:12:10 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ int	parse_args(t_main *m, int argc, char **argv)
 		m->meals_limit = ft_atoi(argv[5], &error);
 	if (error || !check_args(m))
 		return (0);
-	printf("main->count: %zu\n", m->count);
-	printf("main->time_die: %lld\n", m->time_die);
-	printf("main->time_eat: %zu\n", m->time_eat);
-	printf("main->time_sleep: %zu\n", m->time_sleep);
-	printf("main->meals_limit: %zu\n", m->meals_limit);
 	return (1);
 }
 

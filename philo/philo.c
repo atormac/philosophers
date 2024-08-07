@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:36:11 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:13:53 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ int	philo_run(t_main *m)
 		sleep_ms(1);
 	}
 	uninit(m, philos);
-	printf("SIMULATION END\n");
 	return (ret);
 }
