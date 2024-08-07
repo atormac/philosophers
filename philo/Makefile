@@ -14,8 +14,9 @@ NAME = philo
 CC = cc
 CFLAGS := -Wall -Wextra -Werror 
 LDFLAGS := -lpthread
+SOURCE_DIR = source
 SOURCES = main.c init.c thread.c philo.c monitor.c print.c ft_atoi.c
-OBJECTS = $(SOURCES:.c=.o)
+OBJECTS = $(addprefix $(SOURCE_DIR)/,$(SOURCES:.c=.o))
 
 target debug: CC = cc
 target debug: CFLAGS += -fsanitize=address,undefined -g 

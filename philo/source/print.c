@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 #include <sys/time.h>
 
 void	sleep_ms(int milliseconds)

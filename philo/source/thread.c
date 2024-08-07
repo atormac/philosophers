@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 static void	take_forks(t_philo *philo)
 {
@@ -52,7 +52,7 @@ void	*thread_routine(void *ptr)
 	if (philo->main->count == 1)
 		return (single_philo(philo));
 	if (philo->number % 2 == 0)
-		sleep_ms(10);
+		usleep(10 * 1000);
 	while (!has_stopped(philo))
 	{
 		eat_meal(philo);

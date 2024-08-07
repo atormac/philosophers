@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 #include <string.h>
 
 int	init(t_philo *philos, t_main *m)

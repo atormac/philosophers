@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 #include <string.h>
 
 void	*thread_routine(void *ptr);
@@ -44,12 +44,8 @@ int	philo_run(t_main *m)
 		return (0);
 	}
 	ret = philo_threads(m, philos);
-	while (1)
-	{
-		if (!monitor(m, philos))
-			break ;
-		sleep_ms(1);
-	}
+	while (monitor(m, philos))
+		usleep(1 * 1000);
 	uninit(m, philos);
 	return (ret);
 }
