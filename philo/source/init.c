@@ -44,7 +44,6 @@ void	uninit(t_main *m, t_philo *philos)
 	while (i < m->count)
 	{
 		pthread_join(philos[i].thid, NULL);
-		pthread_detach(philos[i].thid);
 		i++;
 	}
 	i = 0;
