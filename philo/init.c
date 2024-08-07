@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:33:29 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 16:25:20 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:20:47 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ int	init(t_philo *philos, t_main *m)
 	if (pthread_mutex_init(&m->mutex, NULL) != 0)
 		return (0);
 	i = 0;
+	memset(philos, 0, m->count * sizeof(t_philo));
 	while (i < m->count)
 	{
 		if (pthread_mutex_init(&philos[i].fork, NULL) != 0)
 			return (0);
 		philos[i].number = i + 1;
 		philos[i].main = m;
-		philos[i].meals_eaten = 0;
-		philos[i].last_ate = 0;
 		philos[i].mutex = &m->mutex;
 		philos[i].fork_left = &philos[i].fork;
 		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
