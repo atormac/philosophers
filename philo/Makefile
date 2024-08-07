@@ -6,7 +6,7 @@
 #    By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 13:55:29 by atorma            #+#    #+#              #
-#    Updated: 2024/08/07 13:12:06 by atorma           ###   ########.fr        #
+#    Updated: 2024/08/07 13:31:06 by atorma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 CC = cc
 CFLAGS := -Wall -Wextra -Werror 
 LDFLAGS := -lpthread
-SOURCES = main.c init.c philo.c monitor.c print.c ft_atoi.c
+SOURCES = main.c init.c thread.c philo.c monitor.c print.c ft_atoi.c
 OBJECTS = $(SOURCES:.c=.o)
 
 target debug: CC = cc

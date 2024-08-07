@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:10:27 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:11:04 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:16:33 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	has_died(t_philo *philo)
 	return (1);
 }
 
-int	philo_monitor(t_main *m, t_philo *philos)
+int	monitor(t_main *m, t_philo *philos)
 {
 	size_t	i;
 	size_t	limit_reached;
