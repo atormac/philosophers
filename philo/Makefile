@@ -20,8 +20,8 @@ OBJECTS = $(SOURCES:.c=.o)
 target debug: CC = cc
 target debug: CFLAGS += -fsanitize=address,undefined -g 
 
-target thread: CC = cc
-target thread: CFLAGS += -pthread -g
+target thread: CC = clang-18
+target thread: CFLAGS += -fsanitize=thread -g
 
 target symbols: CC = cc
 target symbols: CFLAGS += -gdwarf-4
@@ -49,4 +49,4 @@ debug: re
 thread: re
 symbols: re
 
-.PHONY: debug all clean fclean re
+.PHONY: debug thread symbols all clean fclean re
