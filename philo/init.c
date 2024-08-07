@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:33:29 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 14:20:34 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:22:52 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	uninit(t_main *m, t_philo *philos)
 	while (i < m->count)
 	{
 		pthread_join(philos[i].thid, NULL);
+		pthread_detach(philos[i].thid);
 		i++;
 	}
 	i = 0;
