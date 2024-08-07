@@ -21,7 +21,7 @@ target debug: CC = cc
 target debug: CFLAGS += -fsanitize=address,undefined -g 
 
 target thread: CC = cc
-target thread: CFLAGS += -fsanitize=thread -g
+target thread: CFLAGS += -pthread -g
 
 target symbols: CC = cc
 target symbols: CFLAGS += -gdwarf-4

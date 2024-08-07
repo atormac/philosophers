@@ -6,12 +6,25 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:33:29 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 14:22:52 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 15:42:04 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <string.h>
+
+static void	init_forks(t_philo *philos, t_main *m)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < m->count)
+	{
+		philos[i].fork_left = &philos[i].fork;
+		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
+	i++;
+	}
+}
 
 int	init(t_philo *philos, t_main *m)
 {
@@ -30,15 +43,9 @@ int	init(t_philo *philos, t_main *m)
 		philos[i].meals_eaten = 0;
 		philos[i].last_ate = 0;
 		philos[i].mutex = &m->mutex;
-		philos[i].fork_left = &philos[i].fork;
-		philos[i].fork_right = &philos[(i + 1) % m->count].fork;
-		if (i % 2)
-		{
-			philos[i].fork_left = &philos[(i + 1) % m->count].fork;
-			philos[i].fork_right = &philos[i].fork;
-		}
 		i++;
 	}
+	init_forks(philos, m);
 	return (1);
 }
 
