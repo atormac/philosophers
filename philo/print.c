@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 18:05:47 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/30 15:56:27 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:46:02 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	sleep_ms(int milliseconds)
 	usleep(ms);
 }
 
-long long	timestamp_ms()
+long long	timestamp_ms(void)
 {
-	long long	time_ms;
-	struct		timeval tv;
+	long long			time_ms;
+	struct timeval		tv;
 
 	gettimeofday(&tv, NULL);
 	time_ms = (tv.tv_sec * 1000 + tv.tv_usec) / 1000;

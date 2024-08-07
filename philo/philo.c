@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:32:39 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:36:11 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ int	philo_threads(t_main *m, t_philo *philos)
 	i = 0;
 	while (i < m->count)
 	{
-		if (pthread_create(&philos[i].thid, NULL, thread_routine, &philos[i]) != 0)
+		if (pthread_create(&philos[i].thid, NULL,
+				thread_routine, &philos[i]) != 0)
+		{
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -44,7 +47,7 @@ int	philo_run(t_main *m)
 	while (1)
 	{
 		if (!monitor(m, philos))
-			break;
+			break ;
 		sleep_ms(1);
 	}
 	uninit(m, philos);

@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:33:29 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:33:30 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:34:17 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	init(t_philo *philos, t_main *m)
 			philos[i].fork_left = &philos[(i + 1) % m->count].fork;
 			philos[i].fork_right = &philos[i].fork;
 		}
-		printf("philo: %zu, fork_left: %p, fork_right: %p\n",
-				philos[i].number, philos[i].fork_left, philos[i].fork_right);
 		i++;
 	}
 	return (1);

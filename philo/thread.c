@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:30:31 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:31:15 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:46:14 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	*single_philo(t_philo *philo)
 
 void	*thread_routine(void *ptr)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
 	if (philo->main->count == 1)
