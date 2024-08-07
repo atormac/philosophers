@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/07/29 17:46:57 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:12:43 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ typedef struct	t_main
 }	t_main;
 
 
-int		init(t_philo *philos, t_main *m);
-void	uninit(t_main *m, t_philo *philos);
-int		philo_run(t_main *m);
+int			init(t_philo *philos, t_main *m);
+void		uninit(t_main *m, t_philo *philos);
+int			philo_run(t_main *m);
+void		sleep_ms(int milliseconds);
+long long	timestamp_ms();
 
 #endif
