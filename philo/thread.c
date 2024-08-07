@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:30:31 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:46:14 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 13:47:38 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*thread_routine(void *ptr)
 	philo = (t_philo *)ptr;
 	if (philo->main->count == 1)
 		return (single_philo(philo));
-	if ((philo->number % 2)  == 0)
+	if ((philo->number % 2) == 0)
 		sleep_ms(10);
 	while (!has_stopped(philo))
 	{
