@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:10:27 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:16:33 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 16:52:56 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,51 @@ int	has_died(t_philo *philo)
 	return (1);
 }
 
-int	monitor(t_main *m, t_philo *philos)
+static int	meal_limit_reached(t_main *m, t_philo *philos)
 {
 	size_t	i;
 	size_t	limit_reached;
-	int		ret;
 
 	i = 0;
 	limit_reached = 0;
-	pthread_mutex_lock(&m->mutex);
 	while (i < m->count)
 	{
-		if (has_died(&philos[i]))
-			break ;
-		if (m->meals_limit && philos[i].meals_eaten >= m->meals_limit)
+		pthread_mutex_lock(&m->mutex);
+		if (philos[i].meals_eaten >= m->meals_limit)
 			limit_reached++;
+		pthread_mutex_unlock(&m->mutex);
 		i++;
 	}
 	if (limit_reached == m->count)
 	{
+		pthread_mutex_lock(&m->mutex);
 		printf("All philosophers ate %zu times\n", m->meals_limit);
 		m->stopped = 1;
+		pthread_mutex_unlock(&m->mutex);
+		return (1);
 	}
-	ret = m->stopped;
-	pthread_mutex_unlock(&m->mutex);
-	return (!ret);
+	return (0);
+}
+
+int	monitor(t_main *m, t_philo *philos)
+{
+	size_t	i;
+	size_t	limit_reached;
+
+	i = 0;
+	limit_reached = 0;
+	while (i < m->count)
+	{
+		pthread_mutex_lock(&m->mutex);
+		if (has_died(&philos[i]))
+		{
+			pthread_mutex_unlock(&m->mutex);
+			return (0);
+		}
+		pthread_mutex_unlock(&m->mutex);
+		i++;
+	}
+	if (m->meals_limit > 0 && meal_limit_reached(m, philos))
+		return (0);
+	return (1);
 }
