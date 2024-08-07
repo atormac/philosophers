@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 16:03:46 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:37:46 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	philo_run(t_main *m)
 	{
 		if (!monitor(m, philos))
 			break ;
-		sleep_ms(2);
+		sleep_ms(1);
 	}
 	uninit(m, philos);
 	return (ret);

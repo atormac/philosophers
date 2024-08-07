@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:10:27 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 16:52:56 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:48:28 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	monitor(t_main *m, t_philo *philos)
 	while (i < m->count)
 	{
 		pthread_mutex_lock(&m->mutex);
-		if (has_died(&philos[i]))
+		if (m->stopped || has_died(&philos[i]))
 		{
 			pthread_mutex_unlock(&m->mutex);
 			return (0);
