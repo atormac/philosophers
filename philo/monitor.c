@@ -67,10 +67,8 @@ static int	meal_limit_reached(t_main *m, t_philo *philos)
 int	monitor(t_main *m, t_philo *philos)
 {
 	size_t	i;
-	size_t	limit_reached;
 
 	i = 0;
-	limit_reached = 0;
 	while (i < m->count)
 	{
 		pthread_mutex_lock(&m->mutex);

@@ -51,7 +51,7 @@ void	*thread_routine(void *ptr)
 	if (philo->main->count == 1)
 		return (single_philo(philo));
 	if (philo->number % 2 == 0)
-		sleep_ms(10);
+		sleep_ms(philo->main->time_eat / 2);
 	while (!has_stopped(philo))
 	{
 		take_forks(philo);
