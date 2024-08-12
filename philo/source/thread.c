@@ -12,6 +12,8 @@
 
 #include "../include/philo.h"
 
+void	philo_sleep(t_philo *philo, long long ms);
+
 static void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_right);
@@ -28,7 +30,8 @@ static void	eat_meal(t_philo *philo)
 	philo->last_ate = timestamp_ms();
 	pthread_mutex_unlock(philo->mutex);
 	print_message(philo, STATE_EAT);
-	sleep_ms(philo->main->time_eat);
+	philo_sleep(philo, philo->main->time_eat);
+	//sleep_ms(philo->main->time_eat);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 }
@@ -36,7 +39,8 @@ static void	eat_meal(t_philo *philo)
 static void	*single_philo(t_philo *philo)
 {
 	print_message(philo, STATE_TOOK_FORK);
-	sleep_ms(philo->main->time_die);
+	philo_sleep(philo, philo->main->time_die);
+	//sleep_ms(philo->main->time_die);
 	print_message(philo, STATE_DEAD);
 	pthread_mutex_lock(philo->mutex);
 	philo->main->stopped = 1;
@@ -59,7 +63,8 @@ void	*thread_routine(void *ptr)
 		if (has_stopped(philo))
 			break ;
 		print_message(philo, STATE_SLEEP);
-		sleep_ms(philo->main->time_sleep);
+		philo_sleep(philo, philo->main->time_sleep);
+		//sleep_ms(philo->main->time_sleep);
 		print_message(philo, STATE_THINK);
 	}
 	return (NULL);

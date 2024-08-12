@@ -13,23 +13,6 @@
 #include "../include/philo.h"
 #include <sys/time.h>
 
-void	sleep_ms(int milliseconds)
-{
-	unsigned int	ms;
-
-	ms = milliseconds * 1000;
-	usleep(ms);
-}
-
-long long	timestamp_ms(void)
-{
-	long long			time_ms;
-	struct timeval		tv;
-
-	gettimeofday(&tv, NULL);
-	time_ms = (tv.tv_sec * 1000 + tv.tv_usec) / 1000;
-	return (time_ms);
-}
 
 void	print_message(t_philo *philo, int state)
 {

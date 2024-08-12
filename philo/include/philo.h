@@ -48,6 +48,7 @@ typedef struct s_philo
 	size_t			meals_eaten;
 	long long		last_ate;
 	pthread_mutex_t	*mutex;
+	pthread_mutex_t	*state_lock;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
@@ -58,7 +59,6 @@ typedef struct s_philo
 int			init(t_philo *philos, t_main *m);
 void		uninit(t_main *m, t_philo *philos);
 int			philo_run(t_main *m);
-void		sleep_ms(int milliseconds);
 long long	timestamp_ms(void);
 void		print_message(t_philo *philo, int state);
 int			has_stopped(t_philo *philo);

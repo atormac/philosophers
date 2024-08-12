@@ -12,8 +12,37 @@
 
 #include "../include/philo.h"
 #include <string.h>
+#include <sys/time.h>
 
 void	*thread_routine(void *ptr);
+
+long long	timestamp_ms(void)
+{
+	long long			time_ms;
+	struct timeval		tv;
+
+	gettimeofday(&tv, NULL);
+	time_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (time_ms);
+}
+
+void	philo_sleep(t_philo *philo, long long ms)
+{
+	long long	time_till;
+
+	time_till = timestamp_ms() + ms;
+	while (timestamp_ms() < time_till)
+	{
+		usleep(500);
+		pthread_mutex_lock(philo->mutex);
+		if (philo->main->stopped)
+		{
+			pthread_mutex_unlock(philo->mutex);
+			break ;
+		}
+		pthread_mutex_unlock(philo->mutex);
+	}
+}
 
 int	philo_threads(t_main *m, t_philo *philos)
 {
@@ -43,6 +72,7 @@ int	philo_run(t_main *m)
 		free(philos);
 		return (0);
 	}
+	//philo_sleep(philos, 5000);
 	ret = philo_threads(m, philos);
 	while (monitor(m, philos))
 		usleep(1 * 1000);
