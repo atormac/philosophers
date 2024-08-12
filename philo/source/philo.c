@@ -22,25 +22,27 @@ long long	timestamp_ms(void)
 	struct timeval		tv;
 
 	gettimeofday(&tv, NULL);
-	time_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	time_ms = tv.tv_sec * 1000LL + tv.tv_usec / 1000LL;
 	return (time_ms);
 }
 
 void	philo_sleep(t_philo *philo, long long ms)
 {
 	long long	time_till;
+	long long	counter;
 
 	time_till = timestamp_ms() + ms;
+	counter = 0;
 	while (timestamp_ms() < time_till)
 	{
 		usleep(500);
-		pthread_mutex_lock(philo->mutex);
-		if (philo->main->stopped)
+		if (counter > 500)
 		{
-			pthread_mutex_unlock(philo->mutex);
-			break ;
+			if (has_stopped(philo))
+				break ;
+			counter = 0;
 		}
-		pthread_mutex_unlock(philo->mutex);
+		counter++;
 	}
 }
 
