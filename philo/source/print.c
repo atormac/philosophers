@@ -13,7 +13,6 @@
 #include "../include/philo.h"
 #include <sys/time.h>
 
-
 void	print_message(t_philo *philo, int state)
 {
 	char	*msg;

@@ -72,7 +72,6 @@ int	philo_run(t_main *m)
 		free(philos);
 		return (0);
 	}
-	//philo_sleep(philos, 5000);
 	ret = philo_threads(m, philos);
 	while (monitor(m, philos))
 		usleep(1 * 1000);

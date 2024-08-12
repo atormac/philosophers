@@ -31,7 +31,6 @@ static void	eat_meal(t_philo *philo)
 	pthread_mutex_unlock(philo->mutex);
 	print_message(philo, STATE_EAT);
 	philo_sleep(philo, philo->main->time_eat);
-	//sleep_ms(philo->main->time_eat);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 }
@@ -40,7 +39,6 @@ static void	*single_philo(t_philo *philo)
 {
 	print_message(philo, STATE_TOOK_FORK);
 	philo_sleep(philo, philo->main->time_die);
-	//sleep_ms(philo->main->time_die);
 	print_message(philo, STATE_DEAD);
 	pthread_mutex_lock(philo->mutex);
 	philo->main->stopped = 1;
@@ -64,7 +62,6 @@ void	*thread_routine(void *ptr)
 			break ;
 		print_message(philo, STATE_SLEEP);
 		philo_sleep(philo, philo->main->time_sleep);
-		//sleep_ms(philo->main->time_sleep);
 		print_message(philo, STATE_THINK);
 	}
 	return (NULL);
