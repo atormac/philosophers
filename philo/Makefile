@@ -6,13 +6,13 @@
 #    By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 13:55:29 by atorma            #+#    #+#              #
-#    Updated: 2024/08/14 15:54:39 by atorma           ###   ########.fr        #
+#    Updated: 2024/08/14 16:01:15 by atorma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS := -Wall -Wextra -Werror 
+CFLAGS := -Wall -Wextra -Werror -pthread
 LDFLAGS := -lpthread
 INCLUDE_DIR = ./include
 SOURCE_DIR = source
@@ -34,7 +34,7 @@ export CC
 export CFLAGS
 
 $(NAME): $(OBJECTS)
-	$(CC) -o $@ $(CFLAGS) -I$(INCLUDE_DIR) $^ $(LIBS) $(LDFLAGS)
+	$(CC) -o $@ $(CFLAGS) $^ $(LIBS) $(LDFLAGS)
 
 $(SOURCE_DIR)/%.o: %.c
 	$(CC) -c $(CFLAGS) -I$(INCLUDE_DIR) $(LDFLAGS) $< -o $@
