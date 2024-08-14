@@ -6,12 +6,11 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 18:05:47 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 13:46:02 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:07:13 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-#include <sys/time.h>
 
 void	print_message(t_philo *philo, int state)
 {
