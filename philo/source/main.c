@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 14:12:10 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 15:20:32 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_atoi(const char *s, int *error);
 
 int	check_args(t_main *p)
 {
-	if (p->count <= 0 || !p->time_die || !p->time_eat || !p->time_sleep)
+	if (!p->count || !p->time_die || !p->time_eat || !p->time_sleep)
 		return (0);
 	return (1);
 }
@@ -32,7 +32,11 @@ int	parse_args(t_main *m, int argc, char **argv)
 	m->time_sleep = ft_atoi(argv[4], &error);
 	m->meals_limit = 0;
 	if (argc == 6)
+	{
 		m->meals_limit = ft_atoi(argv[5], &error);
+		if (!m->meals_limit)
+			return (0);
+	}
 	if (error || !check_args(m))
 		return (0);
 	return (1);
@@ -55,7 +59,7 @@ int	main(int argc, char **argv)
 	}
 	if (!philo_run(&m))
 	{
-		printf("Error\n");
+		printf("Error encountered\n");
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
