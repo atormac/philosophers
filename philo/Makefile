@@ -6,7 +6,7 @@
 #    By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 13:55:29 by atorma            #+#    #+#              #
-#    Updated: 2024/08/07 13:31:06 by atorma           ###   ########.fr        #
+#    Updated: 2024/08/14 15:54:39 by atorma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = philo
 CC = cc
 CFLAGS := -Wall -Wextra -Werror 
 LDFLAGS := -lpthread
+INCLUDE_DIR = ./include
 SOURCE_DIR = source
 SOURCES = main.c init.c thread.c philo.c monitor.c print.c ft_atoi.c
 OBJECTS = $(addprefix $(SOURCE_DIR)/,$(SOURCES:.c=.o))
@@ -33,10 +34,10 @@ export CC
 export CFLAGS
 
 $(NAME): $(OBJECTS)
-	$(CC) -o $@ $(CFLAGS) $^ $(LIBS) $(LDFLAGS)
+	$(CC) -o $@ $(CFLAGS) -I$(INCLUDE_DIR) $^ $(LIBS) $(LDFLAGS)
 
 $(SOURCE_DIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(LDFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) -I$(INCLUDE_DIR) $(LDFLAGS) $< -o $@
 
 clean:
 	rm -f $(OBJECTS)
