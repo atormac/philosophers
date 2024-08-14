@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:09:48 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/07 14:51:42 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:05:39 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int			philo_run(t_main *m);
 long long	timestamp_ms(void);
 void		print_message(t_philo *philo, int state);
 int			has_stopped(t_philo *philo);
-int			has_died(t_philo *philo);
 int			monitor(t_main *m, t_philo *philos);
 
 #endif

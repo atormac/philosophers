@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/14 15:23:46 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:04:43 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	philo_sleep(t_philo *philo, long long ms)
 	}
 }
 
-int	philo_threads(t_main *m, t_philo *philos)
+static int	philo_threads(t_main *m, t_philo *philos)
 {
 	m->threads_created = 0;
 	while (m->threads_created < m->count)

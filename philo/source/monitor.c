@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:10:27 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/14 15:37:51 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:05:26 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	has_stopped(t_philo *philo)
 	return (ret);
 }
 
-int	has_died(t_philo *philo)
+static int	has_died(t_philo *philo)
 {
 	long long	delta;
 	long long	ms;
