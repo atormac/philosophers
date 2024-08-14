@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:57:06 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/14 15:20:32 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 15:47:14 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 size_t	ft_atoi(const char *s, int *error);
 
-int	check_args(t_main *p)
+int	check_args(t_main *m)
 {
-	if (!p->count || !p->time_die || !p->time_eat || !p->time_sleep)
+	if (!m->count || !m->time_die || !m->time_eat || !m->time_sleep)
 		return (0);
 	return (1);
 }
