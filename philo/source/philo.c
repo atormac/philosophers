@@ -6,7 +6,7 @@
 /*   By: atorma <atorma@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:07:57 by atorma            #+#    #+#             */
-/*   Updated: 2024/08/14 16:07:25 by atorma           ###   ########.fr       */
+/*   Updated: 2024/08/14 16:53:13 by atorma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	philo_sleep(t_philo *philo, long long ms)
 	counter = 0;
 	while (timestamp_ms() < time_till)
 	{
-		usleep(500);
-		if (counter > 500)
+		usleep(250);
+		if (counter > 1000)
 		{
 			if (has_stopped(philo))
 				break ;
