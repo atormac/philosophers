@@ -48,17 +48,19 @@ void	philo_sleep(t_philo *philo, long long ms)
 
 int	philo_threads(t_main *m, t_philo *philos)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < m->count)
+	m->threads_created = 0;
+	while (m->threads_created < m->count)
 	{
-		if (pthread_create(&philos[i].thid, NULL,
-				thread_routine, &philos[i]) != 0)
+		if (pthread_create(&philos[m->threads_created].thid, NULL,
+				thread_routine, &philos[m->threads_created]) != 0)
 		{
+			pthread_mutex_lock(&m->mutex);
+			m->stopped = 1;
+			printf("Error creating threads!\n");
+			pthread_mutex_unlock(&m->mutex);
 			return (0);
 		}
-		i++;
+		m->threads_created++;
 	}
 	return (1);
 }
@@ -75,7 +77,7 @@ int	philo_run(t_main *m)
 		return (0);
 	}
 	ret = philo_threads(m, philos);
-	while (monitor(m, philos))
+	while (ret && monitor(m, philos))
 		usleep(1 * 1000);
 	uninit(m, philos);
 	return (ret);

@@ -33,6 +33,7 @@ typedef struct s_philo	t_philo;
 typedef struct t_main
 {
 	int				stopped;
+	size_t			threads_created;
 	size_t			count;
 	size_t			meals_limit;
 	long long		time_die;

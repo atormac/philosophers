@@ -13,6 +13,13 @@
 #include "../include/philo.h"
 #include <string.h>
 
+static int	destroy_mutexes(t_philo *philos, int i)
+{
+	while (i-- > 0)
+		pthread_mutex_destroy(&philos[i].fork);
+	return (0);
+}
+
 int	init(t_philo *philos, t_main *m)
 {
 	size_t	i;
@@ -25,7 +32,10 @@ int	init(t_philo *philos, t_main *m)
 	while (i < m->count)
 	{
 		if (pthread_mutex_init(&philos[i].fork, NULL) != 0)
-			return (0);
+		{
+			pthread_mutex_destroy(&m->mutex);
+			return (destroy_mutexes(philos, i));
+		}
 		philos[i].number = i + 1;
 		philos[i].main = m;
 		philos[i].mutex = &m->mutex;
@@ -41,7 +51,7 @@ void	uninit(t_main *m, t_philo *philos)
 	size_t	i;
 
 	i = 0;
-	while (i < m->count)
+	while (i < m->threads_created)
 	{
 		pthread_join(philos[i].thid, NULL);
 		i++;
